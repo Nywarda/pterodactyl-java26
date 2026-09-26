@@ -1,15 +1,32 @@
 FROM eclipse-temurin:26-jdk
 
-RUN apt-get update \
-    && apt-get install -y curl ca-certificates tzdata bash \
+LABEL author="Nywarda"
+LABEL org.opencontainers.image.source="https://github.com/Nywarda/pterodactyl-java26"
+
+RUN apt-get update -y \
+    && apt-get install -y \
+        lsof \
+        curl \
+        ca-certificates \
+        openssl \
+        git \
+        tar \
+        sqlite3 \
+        fontconfig \
+        libfreetype6 \
+        tzdata \
+        iproute2 \
+        libstdc++6 \
+    && useradd -d /home/container -m container \
     && rm -rf /var/lib/apt/lists/*
 
-RUN useradd -m -d /home/container container
-
 USER container
+
 ENV USER=container
 ENV HOME=/home/container
 
 WORKDIR /home/container
 
-CMD ["/bin/bash"]
+COPY entrypoint.sh /entrypoint.sh
+
+CMD ["/bin/bash", "/entrypoint.sh"]
