@@ -31,5 +31,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/pterodactyl-java26:latest
-            ghcr.io/${{ github.repository_owner }}/pterodactyl-java26:java26
+            ghcr.io/nywarda/pterodactyl-java26:latest
+            ghcr.io/nywarda/pterodactyl-java26:java26
